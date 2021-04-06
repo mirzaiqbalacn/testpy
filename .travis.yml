@@ -1,0 +1,59 @@
+language: generic
+
+before_install:
+  - pip install -r requirements.txt
+  - wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+  - echo "602d2529aafdaa0f605c06adb7c72cfb585d8aa19b3f4d8d189b42589e27bf11  terraform_0.12.24_linux_amd64.zip" | sha256sum --check --status
+  - unzip terraform_0.12.24_linux_amd64.zip
+  - sudo mv ./terraform /usr/local/bin/terraform
+  - rm terraform_0.12.24_linux_amd64.zip
+  - wget https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-2.2.20.tar.bz2
+  - echo "04a7c9d48b74c399168ee8270e548588ddbe52218c337703d7f06373d326ca30 gnupg-2.2.20.tar.bz2" | sha256sum --check --status
+  - sudo tar -xf gnupg-2.2.20.tar.bz2 -C /usr/local/bin/
+  - gpg --import awscli_pub_key
+  - curl -o awscliv2.sig https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip.sig
+  - curl -o awscliv2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+  - gpg --verify awscliv2.sig awscliv2.zip
+  - unzip awscliv2.zip
+  - sudo ./aws/install
+
+stages:
+  - name: BI Dev
+    if: 1 = 42
+  - name: BI Tst
+    if: 42 = 42
+  - name: BI Prod
+    if: 42 = 42
+
+jobs:
+  include:
+  - stage: BI Dev
+    name: "BI Dev"
+    script:
+      - terraform init terraformscripts/dev
+      - RSPasswd=$(/usr/local/bin/aws ssm get-parameters --name "/bi/dev/redshift/passwd" | grep Value | cut -d '"' -f 4)
+      - terraform validate terraformscripts/dev
+      - terraform plan -var redshift_passwd=$RSPasswd terraformscripts/dev
+      - 'if [[ "$TRAVIS_EVENT_TYPE" == "push" && "$TRAVIS_BRANCH" == "master" ]] ; then terraform apply -auto-approve -var redshift_passwd=$RSPasswd terraformscripts/dev; fi'
+
+  - stage: BI Tst
+    name: "BI Tst"
+    script:
+      - terraform init terraformscripts/tst
+      - RSPasswd=$(/usr/local/bin/aws ssm get-parameters --name "/bi/tst/redshift/passwd" | grep Value | cut -d '"' -f 4)
+      - terraform validate terraformscripts/tst
+      - terraform plan -lock=false -var redshift_passwd=$RSPasswd terraformscripts/tst
+      - 'if [[ "$TRAVIS_EVENT_TYPE" == "push" && "$TRAVIS_BRANCH" == "master" ]] ; then terraform apply -lock=false -auto-approve -var redshift_passwd=$RSPasswd terraformscripts/tst; fi'
+
+  - stage: BI Prod
+    name: "BI Prod"
+    script:
+      - terraform init terraformscripts/prod
+      - RSPasswd=$(/usr/local/bin/aws ssm get-parameters --name "/bi/prod/redshift/passwd" | grep Value | cut -d '"' -f 4)
+      - terraform validate terraformscripts/prod
+      - terraform plan -var redshift_passwd=$RSPasswd terraformscripts/prod
+      - 'if [[ "$TRAVIS_EVENT_TYPE" == "push" && "$TRAVIS_BRANCH" == "master" ]] ; then terraform apply -auto-approve -var redshift_passwd=$RSPasswd terraformscripts/prod; fi'
+
+branches:
+  only:
+    - master
