@@ -6,11 +6,10 @@ python: 3.6
 before_install:
   - sudo apt-get update
   - sudo apt-get install python3
-  - python3 -m pip install --upgrade pip
 install:
   - pip3 install --user -r requirements.txt
 script:
-  - python -m pytest
+  - python3 -m pytest
 
 branches:
   only:
