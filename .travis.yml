@@ -2,8 +2,10 @@ language: generic
 
 before_install:
   - sudo apt-get update
+install:
+  - pip install --user -r requirements.txt
 script:
-  -pip install -r requirements.txt
+  - python -m pytest
 
 branches:
   only:
