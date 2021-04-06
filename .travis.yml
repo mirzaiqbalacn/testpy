@@ -1,7 +1,7 @@
 language: generic
 dist: xenial
 env: PYTHON_VERSION=3.7.1
-python: 3.6
+python: 3.7
 
 before_install:
   - sudo apt-get update
@@ -17,7 +17,7 @@ install:
 script:
   - echo "Script is getting started"
   - cd PytF/
-  - python -m pytest
+  - python3 -m pytest
  #- echo "On this machine \$LANG=$LANG"
  #- echo "Checking our own code passes"
  #- flake8 --select BLK *.py
