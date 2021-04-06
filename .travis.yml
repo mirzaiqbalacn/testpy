@@ -6,19 +6,26 @@ python: 3.6
 before_install:
   - sudo apt-get update
   - sudo apt-get install python3
+  - pip install coverage
  # - pip install --upgrade pip
-  - echo "Using flake8 to check Python code"
-  - flake8 *.py
+ # - echo "Using flake8 to check Python code"
+  #- flake8 *.py
 
 install:
   - pip install -r requirements.txt
-  - pip show -f flake8
+ # - pip show -f flake8
 script:
- - echo "On this machine \$LANG=$LANG"
- - echo "Checking our own code passes"
- - flake8 --select BLK *.py
- - cd PytF
- - ./run_tests.sh
+  - echo "Script is getting started"
+  - cd PytF
+  - pytest
+ #- echo "On this machine \$LANG=$LANG"
+ #- echo "Checking our own code passes"
+ #- flake8 --select BLK *.py
+
+ #- ./run_tests.sh
+after_success:
+  - coverage run main.py
+  - coverage report
 
 branches:
   only:
