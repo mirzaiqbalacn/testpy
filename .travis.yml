@@ -3,7 +3,7 @@ language: generic
 before_install:
   - sudo apt-get update
 script:
-  -pip install --user -r tests/requirements.txt
+  -pip install --user -r requirements.txt
 
 branches:
   only:
