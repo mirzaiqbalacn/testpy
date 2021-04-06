@@ -16,7 +16,7 @@ install:
  # - pip show -f flake8
 script:
   - echo "Script is getting started"
-  - cd PytF
+  - cd PytF/
   - python -m pytest
  #- echo "On this machine \$LANG=$LANG"
  #- echo "Checking our own code passes"
