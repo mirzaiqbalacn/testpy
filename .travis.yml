@@ -12,6 +12,7 @@ before_install:
 
 install:
   - pip install -r requirements.txt
+  - pip show -f flake8
 script:
  - echo "On this machine \$LANG=$LANG"
  - echo "Checking our own code passes"
