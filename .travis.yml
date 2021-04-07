@@ -14,11 +14,19 @@ before_install:
 install:
   - pip install -r requirements.txt
  # - pip show -f flake8
+stages:
+  - Static Analysis
+  - Test
+
+pylint:
+  stage: Static Analysis
+  script:
+  - pylint -d C0301 PytF/*.py
 script:
   - echo "Script is getting started"
   - cd PytF/
   - python -m pytest
-  - pylint *.py
+
  #- echo "On this machine \$LANG=$LANG"
  #- echo "Checking our own code passes"
  #- flake8 --select BLK *.py
