@@ -21,10 +21,11 @@ stages:
 pylint:
   stage: Static Analysis
   script:
-  - pylint -d C0301 PytF/*.py
+  #- pylint -d C0301 PytF/*.py
 script:
   - echo "Script is getting started"
   - cd PytF/
+  - pylint -d C0301 PytF/*.py
   - python -m pytest
 
  #- echo "On this machine \$LANG=$LANG"
