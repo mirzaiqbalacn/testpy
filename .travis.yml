@@ -19,6 +19,7 @@ script:
   - cd PytF/
   - python -m pytest
   - python -m pylint *.py
+  - python -m flake8 .
  #- echo "On this machine \$LANG=$LANG"
  #- echo "Checking our own code passes"
  #- flake8 --select BLK *.py
