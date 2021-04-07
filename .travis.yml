@@ -27,9 +27,9 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     region: $AWS_DEFAULT_REGION
     bucket: $s3Bucket
-    skip_cleanup: true
     local_dir: PytF
     upload-dir: glue
+    skip_cleanup: true
  #- echo "On this machine \$LANG=$LANG"
  #- echo "Checking our own code passes"
  #- flake8 --select BLK *.py
