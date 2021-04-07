@@ -21,6 +21,8 @@ script:
  # - python -m pylint *.py
 #  - python -m flake8 
 
+before_deploy: "echo 'ready for s3 Deployment?'"
+
 deploy:
     provider: s3
     access_key_id: $AWS_ACCESS_KEY_ID 
@@ -33,7 +35,7 @@ deploy:
  #- echo "On this machine \$LANG=$LANG"
  #- echo "Checking our own code passes"
  #- flake8 --select BLK *.py
-
+after_deploy: "echo 'Done with s3 files deployment?'"
  #- ./run_tests.sh
 branches:
   only:
