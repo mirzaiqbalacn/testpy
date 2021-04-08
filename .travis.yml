@@ -16,7 +16,7 @@ install:
  # - pip show -f flake8
 script:
   - echo "Script is getting started"
-  #- cd PytF/
+  - cd PytF/
   #- python -m pytest
  # - python -m pylint *.py
 #  - python -m flake8 
