@@ -16,7 +16,7 @@ install:
  # - pip show -f flake8
 script:
   - echo "Script is getting started"
-  - cd PytF/
+  #- cd PytF/
   #- python -m pytest
  # - python -m pylint *.py
 #  - python -m flake8 
@@ -29,7 +29,7 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     region: $AWS_DEFAULT_REGION
     bucket: $s3Bucket
-    local_dir: "./PytF/"
+    local_dir: PytF
     upload-dir: glue
     skip_cleanup: true
  #- echo "On this machine \$LANG=$LANG"
