@@ -17,7 +17,7 @@ install:
 script:
   - echo "Script is getting started"
   #- cd PytF/
-  - python -m pytest
+ # - python -m pytest
  # - python -m pylint *.py
 #  - python -m flake8 
 
