@@ -10,15 +10,12 @@ before_install:
   - "if grep '\t' *.py *.rst; then echo 'Tabs are bad, please use four spaces.'; false; fi"
   - "if grep -n -r '[[:blank:]]$' *.py *.rst; then echo 'Please remove trailing whitespace.'; false; fi"
   - pip install --upgrade pip setuptools
-  - pip install flake8 flake8-docstrings restructuredtext-lint black
-  - echo "Using restructuredtext-lint to check documentation"
-  - restructuredtext-lint *.rst
+  - pip install flake8
   - echo "Using flake8 to check Python code"
   - flake8 *.py
-  - echo "Using black to check Python code"
-  - black --check *.py
+
   - echo "Using flake8 to check tests (with lots of exclusions)"
-  - flake8 tests/
+  - flake8 PytF/
  # - pip install --upgrade pip
  # - echo "Using flake8 to check Python code"
   #- flake8 *.py
