@@ -7,6 +7,18 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install python3
   - pip install coverage
+  - "if grep '\t' *.py *.rst; then echo 'Tabs are bad, please use four spaces.'; false; fi"
+  - "if grep -n -r '[[:blank:]]$' *.py *.rst; then echo 'Please remove trailing whitespace.'; false; fi"
+  - pip install --upgrade pip setuptools
+  - pip install flake8 flake8-docstrings restructuredtext-lint black
+  - echo "Using restructuredtext-lint to check documentation"
+  - restructuredtext-lint *.rst
+  - echo "Using flake8 to check Python code"
+  - flake8 *.py
+  - echo "Using black to check Python code"
+  - black --check *.py
+  - echo "Using flake8 to check tests (with lots of exclusions)"
+  - flake8 tests/
  # - pip install --upgrade pip
  # - echo "Using flake8 to check Python code"
   #- flake8 *.py
@@ -18,7 +30,12 @@ script:
   - echo "Script is getting started"
   #- cd PytF/
   #- python -m pytest
-  - python -m pylint .
+  - echo "On this machine \$LANG=$LANG"
+  - echo "Checking our own code passes"
+  - flake8 --select BLK *.py
+  - cd tests
+  - ./runtes.sh
+ # - python -m pylint .
 #  - python -m flake8 
 
 before_deploy: "echo 'ready for s3 Deployment?'"
