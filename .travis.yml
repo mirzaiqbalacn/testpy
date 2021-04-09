@@ -18,7 +18,7 @@ script:
   - echo "Script is getting started"
   #- cd PytF/
   #- python -m pytest
-  - python -m pylint "/"
+  - python -m pylint .
 #  - python -m flake8 
 
 before_deploy: "echo 'ready for s3 Deployment?'"
