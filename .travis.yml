@@ -15,7 +15,7 @@ before_install:
   #- flake8 *.py
 
   - echo "Using flake8 to check tests (with lots of exclusions)"
-  - flake8 PytF/*.py
+  - flake8 --ignore=E501,F401 PytF/*.py
  # - pip install --upgrade pip
  # - echo "Using flake8 to check Python code"
   #- flake8 *.py
