@@ -53,7 +53,7 @@ after_deploy: "echo 'Done with s3 files deployment?'"
  #- ./run_tests.sh
 branches:
   only:
-    - development
+    - master
 
 notifications:
   email: false
