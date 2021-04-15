@@ -15,10 +15,10 @@ before_install:
   #- flake8 *.py
 
   - echo "Using flake8 to check tests (with lots of exclusions)"
-  #- flake8 --ignore=E501,F401 PytF/*.py
+  - flake8 --ignore=E501,F401 PytF/*.py
  # - pip install --upgrade pip
- # - echo "Using flake8 to check Python code"
-  #- flake8 *.py
+  - echo "Using flake8 to check Python code"
+  - flake8 *.py
 
 install:
   - pip install -r requirements.txt
@@ -29,7 +29,7 @@ script:
   #- python -m pytest
   - echo "On this machine \$LANG=$LANG"
   #- echo "Checking our own code passes"
-  #- flake8 --select BLK *.py
+  - flake8 --select BLK *.py
   #- cd tests
   #- ./runtes.sh
  # - python -m pylint .
