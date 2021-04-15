@@ -33,7 +33,7 @@ script:
   #- cd tests
   #- ./runtes.sh
  # - python -m pylint .
-  - python -m flake8 
+ #- python -m flake8 
 
 before_deploy: "echo 'ready for s3 Deployment?'"
 
