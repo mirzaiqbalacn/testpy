@@ -26,7 +26,7 @@ install:
 script:
   - echo "Script is getting started"
   #- cd PytF/
-  - python -m pytest
+  #- python -m pytest
   - echo "On this machine \$LANG=$LANG"
   #- echo "Checking our own code passes"
   #- flake8 --select BLK *.py
