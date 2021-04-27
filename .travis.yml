@@ -5,7 +5,7 @@ python: 3.7
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install python3
+  - sudo apt-get install python3 
   - pip install coverage
   - "if grep '\t' *.py *.rst; then echo 'Tabs are bad, please use four spaces.'; false; fi"
   - "if grep -n -r '[[:blank:]]$' *.py *.rst; then echo 'Please remove trailing whitespace.'; false; fi"
@@ -20,8 +20,8 @@ before_install:
   - echo "Using flake8 to check Python code"
   # - flake8 *.py
 
-install:
-  - pip install -r requirements.txt
+#install:
+ # - pip install -r requirements.txt
  # - pip show -f flake8
 script:
   - echo "Script is getting started"
@@ -57,3 +57,5 @@ branches:
 
 notifications:
   email: false
+    on:
+      branches: main
