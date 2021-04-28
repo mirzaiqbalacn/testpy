@@ -57,5 +57,3 @@ branches:
 
 notifications:
   email: false
-    on:
-      branches: main
