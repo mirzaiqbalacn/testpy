@@ -29,7 +29,7 @@ script:
   - python -m pytest
   - echo "On this machine \$LANG=$LANG"
   #- echo "Checking our own code passes"
-  - flake8 --select BLK *.py
+  #- flake8 --select BLK *.py
   #- cd tests
   #- ./runtes.sh
  # - python -m pylint .
