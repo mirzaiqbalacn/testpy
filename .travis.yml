@@ -7,8 +7,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install python3 
   - pip install coverage
-  - "if grep '\t' *.py *.rst; then echo 'Tabs are bad, please use four spaces.'; false; fi"
-  - "if grep -n -r '[[:blank:]]$' *.py *.rst; then echo 'Please remove trailing whitespace.'; false; fi"
+ # - "if grep '\t' *.py *.rst; then echo 'Tabs are bad, please use four spaces.'; false; fi"
+ # - "if grep -n -r '[[:blank:]]$' *.py *.rst; then echo 'Please remove trailing whitespace.'; false; fi"
   - pip install --upgrade pip setuptools
   - pip install flake8
   - echo "Using flake8 to check Python code"
@@ -18,7 +18,7 @@ before_install:
   - flake8 --ignore=E501,F401 PytF/*.py
  # - pip install --upgrade pip
   - echo "Using flake8 to check Python code"
-   - flake8 *.py
+   #- flake8 *.py
 
 #install:
   - pip install -r requirements.txt
@@ -50,7 +50,8 @@ deploy:
  #- echo "Checking our own code passes"
  #- flake8 --select BLK *.py
 after_deploy: "echo 'Done with s3 files deployment?'"
- #- ./run_tests.sh
+
+#- ./run_tests.sh
 branches:
   only:
     - master
